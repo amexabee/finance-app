@@ -12,7 +12,6 @@ export const setUser = createAsyncThunk(
       });
       const data = response.data;
       if (data.message) {
-        console.log(data.message);
         throw new Error(data.message);
       }
       return data;

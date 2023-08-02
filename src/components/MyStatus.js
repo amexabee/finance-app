@@ -1,8 +1,10 @@
 import { FaLock } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteStartup } from '../features/startups/startupsSlice';
 
 const MyStatus = () => {
+  const dispatch = useDispatch();
   const { startups } = useSelector((store) => store.startups);
   const {
     user: { username },
@@ -28,25 +30,32 @@ const MyStatus = () => {
       <h1 className="text-center m-2">My Startup</h1>
       <div className="card-body">
         <h3 className="card-title">{startup.title}</h3>
-        <h4 className="card-subtitle mb-2 text-muted">{username}</h4>
+        <h4 className="card-subtitle mb-2 text-muted">by {username}</h4>
         <p className="card-text">{startup.description}</p>
         <div className="d-flex align-items-center">
-          <h6>Status:</h6>
-          <button
-            className={`mx-2 btn btn-sm btn-outline-${
+          <h6 className="m-0">Status:</h6>
+          <span
+            className={`my-0 mx-2 badge bg-${
               startup.status ? 'success' : 'danger'
             }`}
           >
             {startup.status ? 'Active' : 'Inactive'}
-          </button>
+          </span>
         </div>
         <div className="d-flex m-2 justify-content-center">
-          <button className="mx-2 btn btn-sm btn-outline-primary">
-            Update details
-          </button>
-          <button className="mx-2 btn btn-sm btn-outline-danger">
-            Delete all details
-          </button>
+          <Link to="/update" className="m-4 p-0">
+            <button className="mx-2 btn btn-block btn-outline-primary">
+              Update details
+            </button>
+          </Link>
+          <Link to="/" className="m-4 p-0">
+            <button
+              onClick={() => dispatch(deleteStartup({ _id: startup._id }))}
+              className="mx-2 btn btn-block btn-outline-danger"
+            >
+              Delete all details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

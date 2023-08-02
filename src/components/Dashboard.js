@@ -10,7 +10,6 @@ const Dashboard = () => {
   const {
     user: { username },
   } = useSelector((store) => store.user);
-  console.log(username);
   const date = new Date();
   const today = new Intl.DateTimeFormat('en-us', {
     dateStyle: 'full',
@@ -48,10 +47,12 @@ const Dashboard = () => {
       <p>{today}</p>
       <h4 className="text-center">REGISTERED STARTUPS</h4>
       <Startups startups={startups} />
-      <div className="d-flex">
-        <MyStatus />
-        <Balance />
-      </div>
+      {startups[0] && (
+        <div className="d-flex">
+          <MyStatus />
+          <Balance />
+        </div>
+      )}
     </div>
   );
 };
