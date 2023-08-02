@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import Balance from './Balance';
 import Startups from './Startups';
 import MyStatus from './MyStatus';
-import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from '../features/user/userSlice';
 
 const Dashboard = () => {
@@ -37,9 +38,11 @@ const Dashboard = () => {
           {!username && (
             <>
               <h5>Welcome</h5>
-              <button className="mx-2 btn btn-sm btn-outline-primary">
-                Log In
-              </button>
+              <Link to="/login" className="mx-2 p-0">
+                <button className="btn btn-sm btn-block btn-outline-primary">
+                  Log In
+                </button>
+              </Link>
             </>
           )}
         </div>

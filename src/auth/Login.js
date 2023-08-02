@@ -1,19 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../features/user/userSlice';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { isLoading, error } = useSelector((store) => store.user);
+  const { error } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setUser({ username, password, path: '/login' }));
-    if (!isLoading && !error) navigate('/');
   };
 
   return (
