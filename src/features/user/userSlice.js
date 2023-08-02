@@ -14,6 +14,7 @@ export const setUser = createAsyncThunk(
       if (data.message) {
         throw new Error(data.message);
       }
+      localStorage.setItem('user', JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -22,7 +23,7 @@ export const setUser = createAsyncThunk(
 );
 
 const initialState = {
-  user: {},
+  user: JSON.parse(localStorage.getItem('user')) || {},
   isLoading: true,
   error: null,
 };
@@ -33,6 +34,7 @@ const userSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.user = {};
+      localStorage.removeItem('user');
     },
     setError: (state, action) => {
       state.error = action.payload;
