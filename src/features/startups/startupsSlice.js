@@ -12,9 +12,9 @@ export const deleteStartup = createAsyncThunk(
   'startup/deleteStartup',
   async ({ _id }, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(url, { data: { _id } });
+      const response = axios.delete(url, { data: { _id } });
       const data = response.data;
-      if (data.message) throw new Error(data.message);
+      if (data?.message) throw new Error(data.message);
       return _id;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -32,30 +32,29 @@ const startupsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getStartups.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getStartups.fulfilled, (state, { payload: startups }) => {
-      state.startups = startups;
-      state.isLoading = false;
-    });
-    builder.addCase(getStartups.rejected, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(deleteStartup.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(deleteStartup.fulfilled, (state, { payload }) => {
-      alert('hi');
-      console.log(payload);
-      state.startups = state.startups.filter(
-        (startup) => startup._id !== payload
-      );
-      state.isLoading = false;
-    });
-    builder.addCase(deleteStartup.rejected, (state) => {
-      state.isLoading = false;
-    });
+    builder
+      .addCase(getStartups.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getStartups.fulfilled, (state, { payload: startups }) => {
+        state.startups = startups;
+        state.isLoading = false;
+      })
+      .addCase(getStartups.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteStartup.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteStartup.fulfilled, (state, { payload: deletedId }) => {
+        state.startups = state.startups.filter(
+          (startup) => startup._id !== deletedId
+        );
+        state.isLoading = false;
+      })
+      .addCase(deleteStartup.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 

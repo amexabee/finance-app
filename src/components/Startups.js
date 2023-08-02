@@ -6,7 +6,7 @@ const Startups = ({ startups }) => {
 
   if (isLoading)
     return (
-      <div class="m-5 d-flex justify-content-center">
+      <div className="m-5 d-flex justify-content-center">
         <div className="loading"></div>
         <div className="loading"></div>
         <div className="loading"></div>
