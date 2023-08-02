@@ -14,3 +14,28 @@ a {
 .btn:hover a {
   color: white !important;
 }
+
+.loading {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0.5rem;
+  animation: loading 2.5s ease-in-out infinite;
+  /* animation-delay: 0s; */
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    transform: scale(0.2);
+    background-color: #0ddcf8;
+  }
+  42% {
+    background-color: #5d4da6;
+  }
+  50% {
+    transform: scale(1);
+    background-color: #42b58fb8;
+  }
+}

@@ -1,6 +1,18 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Startups = ({ startups }) => {
+  const { isLoading } = useSelector((store) => store.startups);
+
+  if (isLoading)
+    return (
+      <div class="m-5 d-flex justify-content-center">
+        <div className="loading"></div>
+        <div className="loading"></div>
+        <div className="loading"></div>
+      </div>
+    );
+
   if (!startups.length)
     return (
       <div className="d-flex flex-column align-items-center justify-content-center">
