@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Startups = ({ startups }) => {
   const { isLoading } = useSelector((store) => store.startups);
@@ -45,7 +46,11 @@ const Startups = ({ startups }) => {
             <td>{startup.owner || startup.user}</td>
             <td>{startup.status ? 'Active' : 'Inactive'}</td>
             <td>{startup.description.substr(0, 30)}...</td>
-            <td>{startup.createdAt}</td>
+            <td>
+              {formatDistanceToNow(new Date(startup.createdAt), {
+                addSuffix: true,
+              })}
+            </td>
           </tr>
         ))}
       </tbody>
