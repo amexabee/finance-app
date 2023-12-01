@@ -7,8 +7,7 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const { user, error } = useSelector((state) => state.user);
-  console.log(user.username);
+  const { error } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +62,7 @@ const SignUpForm = () => {
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
       </div>
-      {error && <p className="text-danger">Username has alredy been taken.</p>}
+      {error && <p className="text-danger">{error}</p>}
       <div className="d-flex justify-content-center">
         <button className="btn btn-success mb-4" type="submit">
           Sign Up

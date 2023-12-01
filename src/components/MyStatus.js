@@ -25,6 +25,20 @@ const MyStatus = () => {
       </div>
     );
 
+  if (!startup)
+    return (
+      <div className="card w-50">
+        <div className="d-flex flex-column align-items-center justify-content-center">
+          <h1 className="m-4">No Startup Found!</h1>
+          <Link to="/create" className="m-4 p-0">
+            <button className="btn btn-lg btn-block btn-outline-primary">
+              Create One!
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+
   return (
     <div className="card w-50">
       <h1 className="text-center m-2">My Startup</h1>
