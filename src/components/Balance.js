@@ -8,7 +8,6 @@ const Balance = () => {
     user: { _id },
   } = useSelector((store) => store.user);
   const startup = startups.filter((startup) => startup.owner === _id)[0];
-  console.log(startup);
 
   return (
     <div className="p-3 w-50">
