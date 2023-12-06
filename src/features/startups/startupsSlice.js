@@ -12,10 +12,9 @@ export const createStartup = createAsyncThunk(
   'startup/createStartup',
   async (body, { rejectWithValue }) => {
     try {
-      const response = axios.post(url, body);
+      const response = await axios.post(url, body);
       const data = response.data;
-      if (data?.message) throw new Error(data.message);
-      getStartups();
+      // getStartups();
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -31,6 +30,7 @@ export const deleteStartup = createAsyncThunk(
       if (data?.message) throw new Error(data.message);
       return _id;
     } catch (error) {
+      console.log(error.response);
       return rejectWithValue(error.message);
     }
   }
@@ -39,12 +39,17 @@ export const deleteStartup = createAsyncThunk(
 const initialState = {
   startups: [],
   isLoading: true,
+  error: null,
 };
 
 const startupsSlice = createSlice({
   name: 'startup',
   initialState,
-  reducers: {},
+  reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getStartups.pending, (state) => {
@@ -59,12 +64,15 @@ const startupsSlice = createSlice({
       })
       .addCase(createStartup.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(createStartup.fulfilled, (state) => {
         state.isLoading = false;
+        state.error = null;
       })
-      .addCase(createStartup.rejected, (state) => {
+      .addCase(createStartup.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.error.message;
       })
       .addCase(deleteStartup.pending, (state) => {
         state.isLoading = true;
@@ -80,5 +88,7 @@ const startupsSlice = createSlice({
       });
   },
 });
+
+export const { setError } = startupsSlice.actions;
 
 export default startupsSlice.reducer;
