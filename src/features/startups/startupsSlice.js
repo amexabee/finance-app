@@ -8,6 +8,20 @@ export const getStartups = createAsyncThunk('startup/getStartups', async () => {
   return res.data;
 });
 
+export const createStartup = createAsyncThunk(
+  'startup/createStartup',
+  async (body, { rejectWithValue }) => {
+    try {
+      const response = axios.post(url, body);
+      const data = response.data;
+      if (data?.message) throw new Error(data.message);
+      getStartups();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteStartup = createAsyncThunk(
   'startup/deleteStartup',
   async ({ _id }, { rejectWithValue }) => {
@@ -41,6 +55,15 @@ const startupsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getStartups.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(createStartup.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createStartup.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(createStartup.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(deleteStartup.pending, (state) => {
