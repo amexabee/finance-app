@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 const Balance = () => {
   const { startups } = useSelector((store) => store.startups);
   const {
-    user: { _id },
+    user: { username },
   } = useSelector((store) => store.user);
-  const startup = startups.filter((startup) => startup.owner === _id)[0];
+  const startup = startups.find((startup) => startup.owner === username);
 
   return (
     <div className="p-3 w-50">
@@ -33,8 +33,11 @@ const Balance = () => {
               className="progress-bar bg-success"
               style={{
                 width: startup?.income
-                  ? startup.income / (startup.spending + startup.income)
-                  : 0,
+                  ? `${
+                      (startup.income * 100) /
+                      (startup.spending + startup.income)
+                    }%`
+                  : '0%',
               }}
             ></div>
           </div>
@@ -54,8 +57,11 @@ const Balance = () => {
               className="progress-bar bg-danger"
               style={{
                 width: startup?.spending
-                  ? startup.spending / (startup.spending + startup.income)
-                  : 0,
+                  ? `${
+                      (startup.spending * 100) /
+                      (startup.spending + startup.income)
+                    }%`
+                  : '0%',
               }}
             ></div>
           </div>
