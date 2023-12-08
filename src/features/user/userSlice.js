@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = 'http://localhost:3500/users';
+const url = 'https://finance-api-abfx.onrender.com/users';
 
 export const setUser = createAsyncThunk(
   'user/setUser',
