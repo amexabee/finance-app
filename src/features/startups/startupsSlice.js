@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = 'http://localhost:3500/business';
+const url = 'https://finance-api-abfx.onrender.com';
 
 export const getStartups = createAsyncThunk('startup/getStartups', async () => {
   const res = await axios(url);
