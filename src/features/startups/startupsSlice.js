@@ -14,7 +14,6 @@ export const createStartup = createAsyncThunk(
     try {
       const response = await axios.post(url, body);
       const data = response.data;
-      // getStartups();
     } catch (error) {
       return rejectWithValue(error.message);
     }

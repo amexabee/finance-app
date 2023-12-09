@@ -48,7 +48,7 @@ const Dashboard = () => {
         </div>
       </div>
       <p>{today}</p>
-      <h4 className="text-center">REGISTERED STARTUPS</h4>
+      <h4 className="text-center mb-4">REGISTERED STARTUPS</h4>
       <Startups startups={startups} />
       {startups[0] && (
         <div className="d-flex">

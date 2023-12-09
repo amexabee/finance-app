@@ -27,26 +27,44 @@ const Startups = ({ startups }) => {
     );
 
   return (
-    <table className="table">
+    <table className="table table-bordered">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Startup</th>
-          <th scope="col">Owner</th>
-          <th scope="col">Status</th>
-          <th scope="col">Description</th>
-          <th scope="col">Created</th>
+          <th scope="col" className="bg-transparent">
+            #
+          </th>
+          <th scope="col" className="bg-transparent">
+            Startup
+          </th>
+          <th scope="col" className="bg-transparent">
+            Owner
+          </th>
+          <th scope="col" className="bg-transparent">
+            Status
+          </th>
+          <th scope="col" className="bg-transparent">
+            Description
+          </th>
+          <th scope="col" className="bg-transparent">
+            Created
+          </th>
         </tr>
       </thead>
       <tbody>
         {startups.map((startup, index) => (
           <tr key={startup._id}>
-            <th scope="row">{index + 1}</th>
-            <td>{startup.title}</td>
-            <td>{startup.owner || startup.user}</td>
-            <td>{startup.status ? 'Active' : 'Inactive'}</td>
-            <td>{startup.description.substr(0, 30)}...</td>
-            <td>
+            <th className="bg-transparent" scope="row">
+              {index + 1}
+            </th>
+            <td className="bg-transparent">{startup.title}</td>
+            <td className="bg-transparent">{startup.owner || startup.user}</td>
+            <td className="bg-transparent">
+              {startup.status ? 'Active' : 'Inactive'}
+            </td>
+            <td className="bg-transparent">
+              {startup.description.substr(0, 30)}...
+            </td>
+            <td className="bg-transparent">
               {formatDistanceToNow(new Date(startup.createdAt), {
                 addSuffix: true,
               })}

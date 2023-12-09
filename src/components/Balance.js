@@ -1,4 +1,4 @@
-import { FaCheck, FaWindowClose } from 'react-icons/fa';
+import { FaCheck, FaWindowClose, FaBalanceScale } from 'react-icons/fa';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 
@@ -10,14 +10,14 @@ const Balance = () => {
   const startup = startups.find((startup) => startup.owner === username);
 
   return (
-    <div className="p-3 w-50">
+    <div className="p-3 w-50 bg-ccc rounded">
       <div className="d-flex flex-column justify-content-center align-items-center">
         <p className="m-0 text-center">CASH BALANCE</p>
         <h4 className="m-0 mb-4">{`$ ${
           startup ? startup.income - startup.spending : 0
         }`}</h4>
       </div>
-      <div className="p-3 mb-4 d-flex justify-content-around bg-light">
+      <div className="p-3 mb-4 d-flex justify-content-around bg-transparent">
         <div>
           <p className="m-0 text-center"> REVENUE</p>
           <h5 className="m-1">{`$ ${startup?.income || 0}`}</h5>
@@ -42,6 +42,7 @@ const Balance = () => {
             ></div>
           </div>
         </div>
+        <FaBalanceScale size={70} className="mt-2" />
         <div>
           <p className="m-0 text-center">EXPENSES</p>
           <h5 className="m-1">{`$ ${startup?.spending || 0}`}</h5>

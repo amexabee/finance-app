@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { createStartup, setError } from '../features/startups/startupsSlice';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CreateStartup = () => {
   const {
@@ -69,9 +70,11 @@ const CreateStartup = () => {
         </div>
         {error && <p className="text-danger">All fields are required.</p>}
         <div className="d-flex justify-content-center">
-          <button className="btn btn-success mb-4" type="submit">
-            Create
-          </button>
+          <Link to="/">
+            <button className="btn btn-success mb-4" type="submit">
+              Create
+            </button>
+          </Link>
         </div>
       </form>
     </main>
